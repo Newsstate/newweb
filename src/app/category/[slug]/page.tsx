@@ -27,7 +27,13 @@ export default async function CategoryPage({ params }: { params: { slug: string 
     notFound()
   }
 
-  const posts = await getPostsByCategory(category.id, { per_page: 20 })
+  let posts = []
+  try {
+    posts = await getPostsByCategory(category.id, { per_page: 20 })
+    posts = Array.isArray(posts) ? posts : []
+  } catch (error) {
+    console.error('Error fetching category posts:', error)
+  }
 
   return (
     <div>
