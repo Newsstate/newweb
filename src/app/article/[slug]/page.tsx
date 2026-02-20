@@ -7,6 +7,7 @@ import ArticleCard from '@/components/ui/ArticleCard'
 import AdSpace from '@/components/ads/AdSpace'
 import InArticleAd from '@/components/ads/InArticleAd'
 import type { Metadata } from 'next'
+import type { WPPost } from '@/lib/types'
 
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
   const post = await getPostBySlug(params.slug)
@@ -44,7 +45,7 @@ export default async function ArticlePage({ params }: { params: { slug: string }
   const authorName = getAuthorName(post)
   const categories = getCategoryNames(post)
   
-  let relatedPosts = []
+  let relatedPosts: WPPost[] = []
   try {
     relatedPosts = await getLatestPosts(4)
     relatedPosts = Array.isArray(relatedPosts) ? relatedPosts : []
