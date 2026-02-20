@@ -4,6 +4,7 @@ import ArticleCard from '@/components/ui/ArticleCard'
 import Sidebar from '@/components/layout/Sidebar'
 import AdSpace from '@/components/ads/AdSpace'
 import type { Metadata } from 'next'
+import type { WPPost } from '@/lib/types'
 
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
   const category = await getCategoryBySlug(params.slug)
@@ -27,7 +28,7 @@ export default async function CategoryPage({ params }: { params: { slug: string 
     notFound()
   }
 
-  let posts = []
+  let posts: WPPost[] = []
   try {
     posts = await getPostsByCategory(category.id, { per_page: 20 })
     posts = Array.isArray(posts) ? posts : []
