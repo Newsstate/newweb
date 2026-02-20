@@ -4,14 +4,15 @@ import ArticleCard from '@/components/ui/ArticleCard'
 import Sidebar from '@/components/layout/Sidebar'
 import BreakingNews from '@/components/ui/BreakingNews'
 import AdSpace from '@/components/ads/AdSpace'
+import type { WPPost, WPCategory } from '@/lib/types'
 
 export const revalidate = 300 // Revalidate every 5 minutes
 
 export default async function HomePage() {
   // Fetch data with error handling
-  let featured = []
-  let latest = []
-  let categories = []
+  let featured: WPPost[] = []
+  let latest: WPPost[] = []
+  let categories: WPCategory[] = []
 
   try {
     [featured, latest, categories] = await Promise.all([
