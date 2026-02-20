@@ -1,8 +1,11 @@
+'use client'
+
 import type { WPPost, WPCategory } from '@/lib/types'
 import Link from 'next/link'
 import { getFeaturedImage, getExcerpt } from '@/lib/wordpress'
 import { format } from 'date-fns'
 import AdSpace from '../ads/AdSpace'
+import { useState } from 'react'
 
 interface SidebarProps {
   categories: WPCategory[]
@@ -91,38 +94,47 @@ export default function Sidebar({ categories, latestPosts }: SidebarProps) {
           </h3>
           <ul style={{ listStyle: 'none', padding: 0 }}>
             {categories.map(cat => (
-              <li key={cat.id} style={{ marginBottom: '0.75rem' }}>
-                <Link 
-                  href={`/category/${cat.slug}`}
-                  style={{ 
-                    display: 'flex', 
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    padding: '0.5rem',
-                    borderRadius: '4px',
-                    transition: 'background 0.2s'
-                  }}
-                  onMouseEnter={(e) => e.currentTarget.style.background = 'var(--bg-primary)'}
-                  onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}
-                >
-                  <span style={{ fontFamily: 'var(--font-sans)', fontWeight: 600 }}>
-                    {cat.name}
-                  </span>
-                  <span style={{ 
-                    fontSize: '0.75rem', 
-                    color: 'white',
-                    background: 'var(--brand-primary)',
-                    padding: '0.125rem 0.5rem',
-                    borderRadius: '12px'
-                  }}>
-                    {cat.count}
-                  </span>
-                </Link>
-              </li>
+              <CategoryLink key={cat.id} category={cat} />
             ))}
           </ul>
         </div>
       )}
     </aside>
+  )
+}
+
+function CategoryLink({ category }: { category: WPCategory }) {
+  const [isHovered, setIsHovered] = useState(false)
+  
+  return (
+    <li style={{ marginBottom: '0.75rem' }}>
+      <Link 
+        href={`/category/${category.slug}`}
+        style={{ 
+          display: 'flex', 
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          padding: '0.5rem',
+          borderRadius: '4px',
+          transition: 'background 0.2s',
+          background: isHovered ? 'var(--bg-primary)' : 'transparent'
+        }}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
+        <span style={{ fontFamily: 'var(--font-sans)', fontWeight: 600 }}>
+          {category.name}
+        </span>
+        <span style={{ 
+          fontSize: '0.75rem', 
+          color: 'white',
+          background: 'var(--brand-primary)',
+          padding: '0.125rem 0.5rem',
+          borderRadius: '12px'
+        }}>
+          {category.count}
+        </span>
+      </Link>
+    </li>
   )
 }
