@@ -43,7 +43,14 @@ export default async function ArticlePage({ params }: { params: { slug: string }
   const featuredImage = getFeaturedImage(post)
   const authorName = getAuthorName(post)
   const categories = getCategoryNames(post)
-  const relatedPosts = await getLatestPosts(4)
+  
+  let relatedPosts = []
+  try {
+    relatedPosts = await getLatestPosts(4)
+    relatedPosts = Array.isArray(relatedPosts) ? relatedPosts : []
+  } catch (error) {
+    console.error('Error fetching related posts:', error)
+  }
 
   return (
     <article className="article-page">
@@ -117,9 +124,11 @@ export default async function ArticlePage({ params }: { params: { slug: string }
           paddingTop: '2rem', 
           borderTop: '1px solid var(--border-color)' 
         }}>
-          <div className="mb-3">
-            <strong>Categories:</strong> {categories.join(', ')}
-          </div>
+          {categories.length > 0 && (
+            <div className="mb-3">
+              <strong>Categories:</strong> {categories.join(', ')}
+            </div>
+          )}
         </footer>
       </div>
 
