@@ -1,0 +1,255 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&family=Source+Sans+3:wght@300;400;600;700;800&family=Playfair+Display:wght@700;900&display=swap');
+
+/* ─────────────────────────────────────────────────────────────────────────── */
+/* CSS Variables — News Design System                                         */
+/* ─────────────────────────────────────────────────────────────────────────── */
+
+:root {
+  /* Brand Colors */
+  --brand-primary: #c41e3a;
+  --brand-dark: #1a1a2e;
+  --brand-accent: #0f3460;
+  
+  /* UI Colors */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8f9fa;
+  --bg-dark: #1a1a2e;
+  --text-primary: #212529;
+  --text-secondary: #6c757d;
+  --text-light: #adb5bd;
+  --border-color: #dee2e6;
+  --border-light: #e9ecef;
+  
+  /* Typography */
+  --font-serif: 'Merriweather', Georgia, serif;
+  --font-sans: 'Source Sans 3', -apple-system, sans-serif;
+  --font-display: 'Playfair Display', Georgia, serif;
+  
+  /* Spacing */
+  --container-max: 1320px;
+  --gap-xs: 0.5rem;
+  --gap-sm: 1rem;
+  --gap-md: 1.5rem;
+  --gap-lg: 2rem;
+  --gap-xl: 3rem;
+  
+  /* Effects */
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+  --shadow-md: 0 4px 6px rgba(0,0,0,0.07);
+  --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ─────────────────────────────────────────────────────────────────────────── */
+/* Reset & Base Styles                                                        */
+/* ─────────────────────────────────────────────────────────────────────────── */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--text-primary);
+  background: var(--bg-primary);
+  overflow-x: hidden;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────── */
+/* Typography                                                                  */
+/* ─────────────────────────────────────────────────────────────────────────── */
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 0.75rem;
+  color: var(--text-primary);
+}
+
+h1 { font-size: clamp(2rem, 5vw, 3.5rem); }
+h2 { font-size: clamp(1.75rem, 4vw, 2.5rem); }
+h3 { font-size: clamp(1.5rem, 3vw, 2rem); }
+h4 { font-size: clamp(1.25rem, 2.5vw, 1.5rem); }
+h5 { font-size: 1.125rem; }
+h6 { font-size: 1rem; }
+
+p {
+  margin-bottom: 1rem;
+  font-family: var(--font-serif);
+  font-size: 1.0625rem;
+  line-height: 1.8;
+}
+
+a {
+  color: var(--brand-primary);
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+a:hover {
+  color: var(--brand-accent);
+}
+
+/* ─────────────────────────────────────────────────────────────────────────── */
+/* Container & Layout                                                         */
+/* ─────────────────────────────────────────────────────────────────────────── */
+
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.section {
+  padding: var(--gap-xl) 0;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  font-weight: 900;
+  margin-bottom: var(--gap-md);
+  padding-bottom: var(--gap-sm);
+  border-bottom: 3px solid var(--brand-primary);
+  display: inline-block;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────── */
+/* Article Content Styling                                                    */
+/* ─────────────────────────────────────────────────────────────────────────── */
+
+.article-content {
+  font-family: var(--font-serif);
+  font-size: 1.125rem;
+  line-height: 1.9;
+  color: var(--text-primary);
+}
+
+.article-content h2,
+.article-content h3,
+.article-content h4 {
+  font-family: var(--font-display);
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.article-content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+  margin: 2rem 0;
+}
+
+.article-content blockquote {
+  border-left: 4px solid var(--brand-primary);
+  padding-left: 1.5rem;
+  margin: 2rem 0;
+  font-style: italic;
+  color: var(--text-secondary);
+  font-size: 1.25rem;
+}
+
+.article-content ul,
+.article-content ol {
+  margin: 1.5rem 0;
+  padding-left: 2rem;
+}
+
+.article-content li {
+  margin-bottom: 0.5rem;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────── */
+/* Utility Classes                                                            */
+/* ─────────────────────────────────────────────────────────────────────────── */
+
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+.mb-0 { margin-bottom: 0 !important; }
+.mb-1 { margin-bottom: var(--gap-xs); }
+.mb-2 { margin-bottom: var(--gap-sm); }
+.mb-3 { margin-bottom: var(--gap-md); }
+.mb-4 { margin-bottom: var(--gap-lg); }
+.mt-4 { margin-top: var(--gap-lg); }
+.py-4 { padding-top: var(--gap-lg); padding-bottom: var(--gap-lg); }
+
+.d-flex { display: flex; }
+.align-items-center { align-items: center; }
+.justify-content-between { justify-content: space-between; }
+.gap-2 { gap: var(--gap-sm); }
+
+/* ─────────────────────────────────────────────────────────────────────────── */
+/* Animations                                                                  */
+/* ─────────────────────────────────────────────────────────────────────────── */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.6s ease-out;
+}
+
+.slide-in {
+  animation: slideInRight 0.5s ease-out;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────── */
+/* Responsive                                                                  */
+/* ─────────────────────────────────────────────────────────────────────────── */
+
+@media (max-width: 768px) {
+  body {
+    font-size: 15px;
+  }
+  
+  .article-content {
+    font-size: 1.0625rem;
+  }
+  
+  .section {
+    padding: var(--gap-md) 0;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────────────────── */
+/* Print Styles                                                                */
+/* ─────────────────────────────────────────────────────────────────────────── */
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+}
