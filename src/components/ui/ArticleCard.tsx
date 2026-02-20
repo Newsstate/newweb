@@ -1,38 +1,39 @@
+'use client'
+
 import type { WPPost } from '@/lib/types'
 import Link from 'next/link'
 import Image from 'next/image'
 import { getFeaturedImage, getExcerpt, getCategoryNames } from '@/lib/wordpress'
 import { format } from 'date-fns'
 import CategoryBadge from './CategoryBadge'
+import { useState } from 'react'
 
 interface ArticleCardProps {
   post: WPPost
 }
 
 export default function ArticleCard({ post }: ArticleCardProps) {
+  const [isHovered, setIsHovered] = useState(false)
   const featuredImage = getFeaturedImage(post)
   const excerpt = getExcerpt(post, 120)
   const categories = getCategoryNames(post)
 
   return (
-    <article style={{ 
-      border: '1px solid var(--border-light)',
-      borderRadius: '8px',
-      overflow: 'hidden',
-      transition: 'var(--transition)',
-      background: 'white',
-      display: 'flex',
-      flexDirection: 'column',
-      height: '100%'
-    }}
-    onMouseEnter={(e) => {
-      e.currentTarget.style.boxShadow = 'var(--shadow-lg)'
-      e.currentTarget.style.transform = 'translateY(-4px)'
-    }}
-    onMouseLeave={(e) => {
-      e.currentTarget.style.boxShadow = 'none'
-      e.currentTarget.style.transform = 'translateY(0)'
-    }}
+    <article 
+      style={{ 
+        border: '1px solid var(--border-light)',
+        borderRadius: '8px',
+        overflow: 'hidden',
+        transition: 'var(--transition)',
+        background: 'white',
+        display: 'flex',
+        flexDirection: 'column',
+        height: '100%',
+        boxShadow: isHovered ? 'var(--shadow-lg)' : 'none',
+        transform: isHovered ? 'translateY(-4px)' : 'translateY(0)',
+      }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
       {featuredImage && (
         <Link href={`/article/${post.slug}`} style={{ position: 'relative', height: '200px', overflow: 'hidden' }}>
